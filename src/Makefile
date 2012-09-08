@@ -42,7 +42,7 @@ PLATS= generic linux bsd osx mingw
 
 OBJS= luasys.o sock/sys_sock.o
 LDOBJS= $(OBJS)
-
+XCFLAGS=
 
 default: $(PLAT)
 
@@ -64,23 +64,23 @@ none:
 	@echo "	$(PLATS)"
 
 generic:
-	$(MAKE) all MYCFLAGS=
+	$(MAKE) all MYCFLAGS="" ${XCFLAGS}
 
 linux:
-	$(MAKE) all MYCFLAGS="-DUSE_EPOLL -DUSE_EVENTFD" MYLIBS="-lrt"
+	$(MAKE) all MYCFLAGS="-DUSE_EPOLL -DUSE_EVENTFD" ${XCFLAGS} MYLIBS="-lrt"
 
 bsd:
-	$(MAKE) all MYCFLAGS="-DUSE_KQUEUE" LDOBJS="*.o"
+	$(MAKE) all MYCFLAGS="-DUSE_KQUEUE" ${XCFLAGS} LDOBJS="*.o"
 
 osx:
-	$(MAKE) all MYCFLAGS="-DUSE_KQUEUE" STRIP="echo strip" \
+	$(MAKE) all MYCFLAGS="-DUSE_KQUEUE" ${XCFLAGS} STRIP="echo strip" \
 	MYLDFLAGS="-bundle -undefined dynamic_lookup /usr/lib/bundle1.o"
 
 mingw:
 	$(MAKE) all A="sys.lib" T="sys.dll" \
 	AR="$(CC) -shared -o" RANLIB="strip --strip-unneeded" \
 	COPT="-O2 -DNDEBUG" RM="del" \
-	MYCFLAGS="-DLUA_BUILD_AS_DLL" \
+	MYCFLAGS="-DLUA_BUILD_AS_DLL" ${XCFLAGS} \
 	MYLDFLAGS="-s -shared -L$(MINGW_HOME)/i686-w64-mingw32/lib" \
 	LIBS="$(LUA)/src/lua51.dll -lmsvcrt -lkernel32 -luser32 -lwinmm -lshell32 -ladvapi32 -lws2_32" \
 	OBJS="luasys.o sock/sys_sock.o isa/isapi/isapi_dll.o"

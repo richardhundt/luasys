@@ -384,7 +384,7 @@ static const char *const stdlib_names[] = {
 #if LUA_VERSION_NUM >= 502
     LUA_COLIBNAME, LUA_BITLIBNAME,
 #endif
-#ifdef LUA_JITLIBNAME
+#ifdef SYS_LJ2
     LUA_JITLIBNAME, LUA_BITLIBNAME, LUA_FFILIBNAME,
 #endif
     NULL
@@ -395,7 +395,7 @@ static const lua_CFunction stdlib_funcs[] = {
 #if LUA_VERSION_NUM >= 502
     luaopen_coroutine, luaopen_bit32,
 #endif
-#ifdef LUA_JITLIBNAME
+#ifdef SYS_LJ2
     luaopen_jit, luaopen_bit, luaopen_ffi
 #endif
 };
