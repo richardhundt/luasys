@@ -86,7 +86,7 @@ mingw:
 	OBJS="luasys.o sock/sys_sock.o isa/isapi/isapi_dll.o"
 
 clean:
-	$(RM) $(T) *.o */*.o
+	$(RM) $(T) *.o */*.o $(A)
 
 
 .PHONY: all $(PLATS) default a clean
