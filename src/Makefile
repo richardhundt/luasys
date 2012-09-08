@@ -4,7 +4,7 @@ PLAT= none
 LUA= /tmp/lua-5.2.0
 
 T= sys.so
-A= $(LUA)/src/libluasys.a
+A= libluasys.a
 
 COPT= -O2 -fPIC -DNDEBUG
 CWARNS = -W -Wall -Wextra -pedantic \
